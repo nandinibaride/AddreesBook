@@ -45,6 +45,8 @@ public class AddressBook {
 		
 		personList.add(person);
 	}
+	
+
 	/*
 	 * @purpose: Edit contact details using cases
 	 * @return: No return value
@@ -126,13 +128,30 @@ public class AddressBook {
 
 		}
 	}
+	/*
+	 * @purpose: Remove contact details in list
+	 * @return: No return value
+	 */
 	
-	public static void main(String args[]) {
+      public void removeContactDetails() {
+		
+		System.out.println("Enter the contact details:");
+		System.out.println("Enter the first name:");
+		String firstName = sc.next();
+				
+		for(Person person : personList) {
+			if(person.getFirstName().equals(firstName)) {
+				personList.remove(person);
+			}
+		}		
+	}
+   
+     public static void main(String args[]) {
 		
 		AddressBook addressBook = new AddressBook();
 		boolean flag = true;
 		while(flag) {
-		System.out.println("1.Add Contact" + "\n" + "2.Edit Contact" + "\n" + "3.Display AddressBook" + "\n" + "4.Exit");
+		System.out.println("1.Add Contact" + "\n" + "2.Edit Contact" + "\n" + "3.Display AddressBook" + "\n" + "4.Delete Contact" + "\n" + "5.Exit");
 		System.out.println("Enter Choice");
 		int choice = sc.nextInt();
 		
@@ -151,6 +170,9 @@ public class AddressBook {
 			System.out.println(personList);
 			break;
 			
+		case 4:
+			addressBook.removeContactDetails();        
+			break;
 		default:
 			flag = false;
 			break;
