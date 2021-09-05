@@ -1,14 +1,14 @@
 package addressbook.com;
 
 public class Person {
-	public String firstname;
-	public String lastname;
-	public String address;
-	public String city;
-	public String state;
-	public long zip;
-	public long phonenumber;
-	public String email;
+	private String firstname;
+	private String lastname;
+	private String address;
+	private String city;
+	private String state;
+	private long zip;
+	private long phonenumber;
+	private String email;
 	
 	public String getFirstname() {
 		return firstname;
@@ -79,5 +79,6 @@ public class Person {
 		return "Person [firstname=" + firstname + ", lastname=" + lastname + ", address=" + address + ", city=" + city
 				+ ", state=" + state + ", zip=" + zip + ", phonenumber=" + phonenumber + ", email=" + email + "]";
 		}
+	
  }
 
