@@ -7,6 +7,7 @@ public class AddressBook {
 	
 	static Scanner sc = new Scanner(System.in);
 	static ArrayList<Person> personList = new ArrayList<Person>();
+	static ArrayList<Person> familyList = new ArrayList<Person>();
 	
 	/*
 	 * @purpose:Add contact details and set this details
@@ -33,7 +34,7 @@ public class AddressBook {
 		System.out.println("Enter the zip:");
     	String zip =sc.next();
 		
-		Person person = new Person();
+    	Person person = new Person();
 		person.setFirstName(firstName);
 		person.setLastName(lastName);
 		person.setAddress(address);
@@ -42,8 +43,40 @@ public class AddressBook {
 		person.setEmail(email);
 		person.setPhonenumber(phoneNumber);
 		person.setZip(zip);
-		
 		personList.add(person);
+	}
+		public void addFamilyDetails() {
+		
+		System.out.println("Enter the contact details:");
+		System.out.println("Enter the first name:");
+		String firstName = sc.next();
+		System.out.println("Enter the last name:");
+		String lastName = sc.next();
+		System.out.println("Enter the address:");
+		String address = sc.next();
+		System.out.println("Enter the city:");
+		String city = sc.next();
+		System.out.println("Enter the state:");
+		String state = sc.next();
+		System.out.println("Enter the email:");
+		String email = sc.next();
+		System.out.println("Enter the phonenumber:");
+		String phoneNumber = sc.next();
+		System.out.println("Enter the zip:");
+    	String zip =sc.next();
+		
+		Person family = new Person();
+		
+		family.setFirstName(firstName);
+		family.setLastName(lastName);
+		family.setAddress(address);
+		family.setCity(city);
+		family.setState(state);
+		family.setEmail(email);
+		family.setPhonenumber(phoneNumber);
+		family.setZip(zip);
+		
+		familyList.add(family);
 	}
 	
 
@@ -158,6 +191,7 @@ public class AddressBook {
 		switch(choice) {
 		case 1:
 			addressBook.addContactDetails();
+			addressBook.addFamilyDetails();
 			break;
 		
 		case 2:
@@ -168,6 +202,8 @@ public class AddressBook {
 		
 		case 3:
 			System.out.println(personList);
+			System.out.println(familyList);
+			
 			break;
 			
 		case 4:
