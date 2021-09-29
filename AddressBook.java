@@ -190,7 +190,7 @@ public class AddressBook
 	/*
 	 * @purpose: Search person by city.
 	 */
-	public void searchPersonByCity()
+	public void searchandViewPersonByCity()
 	{
         System.out.println("Enter the name of the City: ");
 		String cityName = sc.next();
@@ -209,7 +209,7 @@ public class AddressBook
 		boolean flag = true;
 		while (flag) {
 			System.out.println("1.Add Contact" + "\n" + "2.Edit Contact" + "\n" + "3.Display AddressBook" + "\n"
-					+ "4.Delete Contact" + "\n" + "5.Search person by city" + "\n" + "6.Exit");
+					+ "4.Delete Contact" + "\n" + "5.Search and view person by city" + "\n" + "6.Exit");
 			System.out.println("Enter the Choice");
 			int choice = sc.nextInt();
 
@@ -234,7 +234,7 @@ public class AddressBook
 				break;
 
 			case 5:
-				addressBook.searchPersonByCity();
+				addressBook.searchandViewPersonByCity();
 				break;
 			case 6:
 			default:
