@@ -3,55 +3,64 @@ package addressbook.com;
 import java.awt.List;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+import java.lang.*;
 
-public class AddressBook {
-
-	static Scanner sc = new Scanner(System.in);
+public class AddressBook
+{
+    static Scanner sc = new Scanner(System.in);
 	static ArrayList<Person> addressbookName = new ArrayList<Person>();
 	static HashMap<String, ArrayList<Person>> addressbook = new HashMap<>();
 	static String addressBookName;
+	static String city;
 	int countAddressBook = 0;
 
-	public void addContactDetails() {
-		if (countAddressBook == 0) {
+	public void addContactDetails()
+	{
+		if (countAddressBook == 0)
+		{
 			System.out.println("AddressBook is not present");
 		}
 		System.out.println("Add new AddressBook:");
 		addressBookName = sc.next();
-
-		System.out.println("Enter the contact details:");
+        System.out.println("Enter the contact details:");
 
 		Person addContactDetails = new Person();
 		System.out.println("Enter the first name:");
 		String firstName = sc.next();
 
-		if (countAddressBook > 0) {
-			while (true) {
-				if (checkDuplicateEntry(firstName)) {
+		if (countAddressBook > 0)
+		{ 
+			while (true)
+			{
+				if (checkDuplicateEntry(firstName))
+				{
 					System.out.println("Contact already exist..Please enter other name");
 					System.out.println("Enter the first name:");
 					firstName = sc.next();
 					break;
-				} else {
-
-					break;
+				} 
+				else 
+				{
+                   break;
 				}
 
 			}
-		}
+		 }
 
 		System.out.println("Enter the last name:");
 		String lastName = sc.next();
 		System.out.println("Enter the address:");
 		String address = sc.next();
 		System.out.println("Enter the city:");
-		String city = sc.next();
+		city = sc.next();
 		System.out.println("Enter the state:");
 		String state = sc.next();
 		System.out.println("Enter the email:");
@@ -73,11 +82,17 @@ public class AddressBook {
 		addressbookName.add(addContactDetails);
 		addressbook.put(addressBookName, addressbookName);
 		countAddressBook++;
-	}
 
-	public void editContact(String fName) {
-		for (Person person : addressbookName) {
-			if (person.getFirstName().equals(fName)) {
+    }
+   /*
+    * @purpose: Edit contact details 
+    */
+    public void editContact(String fName)
+	{
+		for (Person person : addressbookName)
+		{
+			if (person.getFirstName().equals(fName)) 
+			{
 				System.out.println("Enter the detail which needs to be updated:");
 				System.out.println("1 : First Name of the contact to be edited");
 				System.out.println("2 : Last Name of the contact to be edited");
@@ -145,43 +160,63 @@ public class AddressBook {
 
 		}
 	}
-
-	public void removeContactDetails() {
+	/*
+	 * @purpose: Remove contact details using first name.
+	 */
+	public void removeContactDetails()
+	{
 		System.out.println("Enter the contact details:");
 		System.out.println("Enter the first name:");
 		String firstName = sc.next();
 
-		for (Person person : addressbookName) {
-			if (person.getFirstName().equals(firstName)) {
+		for (Person person : addressbookName)
+		{
+			if (person.getFirstName().equals(firstName))
+			{
 				addressbookName.remove(person);
 			}
 		}
-	}
+	 }
 
 	/*
 	 * @purpose: To check duplicate entry using first name
-	 * 
-	 * @input: Given first name
-	 * 
-	 * @output: check first name is equal to given data book.
 	 */
-	public boolean checkDuplicateEntry(String fName) {
+
+	public boolean checkDuplicateEntry(String fName)
+	{
 		ArrayList<Person> personlist = addressbook.get(addressBookName);
 		return personlist.stream().anyMatch(person -> fName.equals(person.getFirstName()));
 	}
-
-	public static void main(String args[]) {
+	/*
+	 * @purpose: Search person by city.
+	 */
+	public void searchPersonByCity()
+	{
+        System.out.println("Enter the name of the City: ");
+		String cityName = sc.next();
+		System.out.println("Enter the name of the Person : ");
+		String personName = sc.next();
+	    ArrayList<Person> Personlist = addressbook.get(addressBookName);
+			addressbookName.stream()
+					.filter(person -> person.getFirstName().equals(personName) && person.getCity().equals(cityName))
+					.forEach(person -> System.out.println(person));
+	}
+	
+    public static void main(String args[])
+    {
 		AddressBook addressBook = new AddressBook();
+
 		boolean flag = true;
 		while (flag) {
 			System.out.println("1.Add Contact" + "\n" + "2.Edit Contact" + "\n" + "3.Display AddressBook" + "\n"
-					+ "4.Delete Contact" + "\n" + "5.Exit");
+					+ "4.Delete Contact" + "\n" + "5.Search person by city" + "\n" + "6.Exit");
 			System.out.println("Enter the Choice");
 			int choice = sc.nextInt();
 
 			switch (choice) {
 			case 1:
 				addressBook.addContactDetails();
+				addressBook.checkDuplicateEntry(addressBookName);
 				break;
 
 			case 2:
@@ -199,6 +234,9 @@ public class AddressBook {
 				break;
 
 			case 5:
+				addressBook.searchPersonByCity();
+				break;
+			case 6:
 			default:
 				flag = false;
 				break;
