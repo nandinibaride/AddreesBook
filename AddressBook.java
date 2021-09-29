@@ -82,10 +82,8 @@ public class AddressBook
 		addressbookName.add(addContactDetails);
 		addressbook.put(addressBookName, addressbookName);
 		countAddressBook++;
-		
-		
-
     }
+	
    /*
     * @purpose: Edit contact details 
     */
@@ -216,16 +214,53 @@ public class AddressBook
 	}
 	
 	/*
-	 * @purpose:Sort the entries in the alphabetically By using first name.
+	 * @purpose:Sort the entries first name, city, state and zip in address book.
 	 */
-    public void sortByFirstName()
-	{   
+    public void sortEnteriesOfPerson()
+	{ 
+    	System.out.println("1 : Sort person by first name");
+		System.out.println("2 : Sort person by city");
+		System.out.println("3 : Sort person by State");
+		System.out.println("4 : Sort person by zip");
+		
+        int choice = sc.nextInt();
+    	switch (choice) {
+    	case 1:
 		ArrayList<Person> Personlist = addressbook.get(addressBookName);
 		addressbookName.stream()
          .sorted((firstperson, secondperson) -> firstperson.getFirstName().compareTo(secondperson.getFirstName()))
 		 .collect(Collectors.toList())
 		  .forEach(person -> System.out.println(person));
-	 }	
+		break;
+		
+    	case 2:
+    		ArrayList<Person> Personlist1 = addressbook.get(addressBookName);
+    		addressbookName.stream()
+             .sorted((firstperson, secondperson) -> firstperson.getCity().compareTo(secondperson.getCity()))
+    		 .collect(Collectors.toList())
+    		  .forEach(person -> System.out.println(person));
+    		break;
+    		
+    	case 3:
+    		ArrayList<Person> Personlist2 = addressbook.get(addressBookName);
+    		addressbookName.stream()
+             .sorted((firstperson, secondperson) -> firstperson.getState().compareTo(secondperson.getState()))
+    		 .collect(Collectors.toList())
+    		  .forEach(person -> System.out.println(person));
+    		break;
+    		
+    	case 4:
+    		ArrayList<Person> Personlist3 = addressbook.get(addressBookName);
+    		addressbookName.stream()
+             .sorted((firstperson, secondperson) -> firstperson.getZip().compareTo(secondperson.getZip()))
+    		 .collect(Collectors.toList())
+    		  .forEach(person -> System.out.println(person));
+    		break;
+    	
+    	default:
+			break;
+    	}
+	}
 
 	public static void main(String args[])
     {
@@ -261,12 +296,15 @@ public class AddressBook
 			case 5:
 				addressBook.searchandViewPersonByCity();
 				break;
+				
 			case 6:
 				addressBook.countByCity();
 				break;
+				
 			case 7:
-				addressBook.sortByFirstName();
+				addressBook.sortEnteriesOfPerson();
 				break;
+				
 			case 8:
 			default:
 				flag = false;
