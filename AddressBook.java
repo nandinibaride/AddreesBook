@@ -82,6 +82,8 @@ public class AddressBook
 		addressbookName.add(addContactDetails);
 		addressbook.put(addressBookName, addressbookName);
 		countAddressBook++;
+		
+		
 
     }
    /*
@@ -190,7 +192,7 @@ public class AddressBook
 	/*
 	 * @purpose: Search person by city.
 	 */
-	public void searchPersonByCity()
+	public void searchandViewPersonByCity()
 	{
         System.out.println("Enter the name of the City: ");
 		String cityName = sc.next();
@@ -201,15 +203,38 @@ public class AddressBook
 					.filter(person -> person.getFirstName().equals(personName) && person.getCity().equals(cityName))
 					.forEach(person -> System.out.println(person));
 	}
+	 /*
+	  * @purpose:Count City in details	 
+	  */
+	public void countByCity()
+	{
+        System.out.println("Enter the name of the City:");
+		String cityName = sc.next();
+		ArrayList<Person> Personlist = addressbook.get(addressBookName);
+		long count = addressbookName.stream().filter(person -> cityName.equals(person.getCity())).count();
+		System.out.println(count);
+	}
 	
-    public static void main(String args[])
+	/*
+	 * @purpose:Sort the entries in the alphabetically By using first name.
+	 */
+    public void sortByFirstName()
+	{   
+		ArrayList<Person> Personlist = addressbook.get(addressBookName);
+		addressbookName.stream()
+         .sorted((firstperson, secondperson) -> firstperson.getFirstName().compareTo(secondperson.getFirstName()))
+		 .collect(Collectors.toList())
+		  .forEach(person -> System.out.println(person));
+	 }	
+
+	public static void main(String args[])
     {
 		AddressBook addressBook = new AddressBook();
 
 		boolean flag = true;
 		while (flag) {
 			System.out.println("1.Add Contact" + "\n" + "2.Edit Contact" + "\n" + "3.Display AddressBook" + "\n"
-					+ "4.Delete Contact" + "\n" + "5.Search person by city" + "\n" + "6.Exit");
+					+ "4.Delete Contact" + "\n" + "5.Search and view person by city" + "\n" + "6.Count by city" + "\n" + "7.Sort By FirstName" + "\n" + "8.Exit");
 			System.out.println("Enter the Choice");
 			int choice = sc.nextInt();
 
@@ -234,9 +259,15 @@ public class AddressBook
 				break;
 
 			case 5:
-				addressBook.searchPersonByCity();
+				addressBook.searchandViewPersonByCity();
 				break;
 			case 6:
+				addressBook.countByCity();
+				break;
+			case 7:
+				addressBook.sortByFirstName();
+				break;
+			case 8:
 			default:
 				flag = false;
 				break;
@@ -244,3 +275,4 @@ public class AddressBook
 		}
 	}
 }
+
