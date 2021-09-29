@@ -201,15 +201,26 @@ public class AddressBook
 					.filter(person -> person.getFirstName().equals(personName) && person.getCity().equals(cityName))
 					.forEach(person -> System.out.println(person));
 	}
+	 /*
+	  * @purpose:Count City in details	 
+	  */
+	public void countByCity()
+	{
+        System.out.println("Enter the name of the City:");
+		String cityName = sc.next();
+		ArrayList<Person> Personlist = addressbook.get(addressBookName);
+		long count = addressbookName.stream().filter(person -> cityName.equals(person.getCity())).count();
+		System.out.println(count);
+	}
 	
-    public static void main(String args[])
+	public static void main(String args[])
     {
 		AddressBook addressBook = new AddressBook();
 
 		boolean flag = true;
 		while (flag) {
 			System.out.println("1.Add Contact" + "\n" + "2.Edit Contact" + "\n" + "3.Display AddressBook" + "\n"
-					+ "4.Delete Contact" + "\n" + "5.Search and view person by city" + "\n" + "6.Exit");
+					+ "4.Delete Contact" + "\n" + "5.Search and view person by city" + "\n" + "6.Count by city" + "\n" + "7.Exit");
 			System.out.println("Enter the Choice");
 			int choice = sc.nextInt();
 
@@ -237,6 +248,9 @@ public class AddressBook
 				addressBook.searchandViewPersonByCity();
 				break;
 			case 6:
+				addressBook.countByCity();
+				break;
+			case 7:
 			default:
 				flag = false;
 				break;
@@ -244,3 +258,4 @@ public class AddressBook
 		}
 	}
 }
+
